@@ -10,4 +10,5 @@ import com.backend_project.hotel.model.HotelModel;
 public interface HotelRepositories extends JpaRepository<HotelModel, Integer> {
 	Optional<HotelModel> findByUsernameAndPassword(String username, String password);
 	Optional<HotelModel> findByEmail(String email);
+	
 }

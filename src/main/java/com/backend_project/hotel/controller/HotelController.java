@@ -21,17 +21,22 @@ public class HotelController {
     public ResponseEntity<?> login(@RequestBody HotelModel loginRequest) {
         return hotelService.login(loginRequest.getUsername(), loginRequest.getPassword());
     }
+    
+    @PostMapping("/restaurant-login")
+    public ResponseEntity<?> restaurantLogin(@RequestBody HotelModel loginRequest) {
+        return hotelService.restaurantLogin(loginRequest.getUsername(), loginRequest.getPassword());
+    }
+
     @PostMapping("/add")
     public ResponseEntity<HotelModel> addStaff(@RequestBody HotelModel model) {
         return hotelService.addStaff(model);
     }
 
-//
-
     @GetMapping("/all")
     public ResponseEntity<List<HotelModel>> getAllStaff() {
         return hotelService.getAllStaff();
     }
+    
     @PutMapping("/update/{id}")
     public ResponseEntity<HotelModel> updateStaff(@PathVariable Integer id, @RequestBody HotelModel model) {
         return hotelService.updateStaff(id, model);
@@ -41,6 +46,4 @@ public class HotelController {
     public ResponseEntity<Void> deleteStaff(@PathVariable Integer id) {
         return hotelService.deleteStaff(id);
     }
-    
-    
 }

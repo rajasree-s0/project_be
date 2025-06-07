@@ -26,6 +26,7 @@ public class HotelServiceImpl implements HotelService {
         List<HotelModel> staffList = hotelRepositories.findAll();
         return ResponseEntity.ok(staffList);
     }
+
     @Override
     public ResponseEntity<HotelModel> updateStaff(Integer id, HotelModel model) {
         return hotelRepositories.findById(id)
@@ -40,7 +41,6 @@ public class HotelServiceImpl implements HotelService {
                     if (model.getPassword() != null && !model.getPassword().isEmpty()) {
                         staff.setPassword(model.getPassword());
                     }
-                    
                     return ResponseEntity.ok(hotelRepositories.save(staff));
                 })
                 .orElse(ResponseEntity.notFound().build());
@@ -55,6 +55,7 @@ public class HotelServiceImpl implements HotelService {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @Override
     public ResponseEntity<?> login(String username, String password) {
         if (username == null || password == null || username.trim().isEmpty() || password.trim().isEmpty()) {
@@ -65,7 +66,22 @@ public class HotelServiceImpl implements HotelService {
                     if (!"Hotel Manager".equals(staff.getRole())) {
                         return ResponseEntity.badRequest().body("Only Hotel Managers can log in");
                     }
-                    return ResponseEntity.ok().body(staff); // Consistent ResponseEntity type
+                    return ResponseEntity.ok().body(staff);
+                })
+                .orElseGet(() -> ResponseEntity.badRequest().body("Invalid username or password"));
+    }
+
+    @Override
+    public ResponseEntity<?> restaurantLogin(String username, String password) {
+        if (username == null || password == null || username.trim().isEmpty() || password.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("Username and password are required");
+        }
+        return hotelRepositories.findByUsernameAndPassword(username, password)
+                .map(staff -> {
+                    if (!"Restaurant Manager".equals(staff.getRole())) {
+                        return ResponseEntity.badRequest().body("Only Restaurant Managers can log in");
+                    }
+                    return ResponseEntity.ok().body(staff);
                 })
                 .orElseGet(() -> ResponseEntity.badRequest().body("Invalid username or password"));
     }

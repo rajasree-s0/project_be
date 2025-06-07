@@ -41,6 +41,8 @@ public class HotelModel {
     @Column(name="staff_role")
     private String role;
     
+    
+    
   
     
    
