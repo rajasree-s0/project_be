@@ -1,10 +1,10 @@
-
 package com.backend_project.hotel.service;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.backend_project.hotel.exception.CustomerAlreadyExistsException;
 import com.backend_project.hotel.model.CustomerModel;
 import com.backend_project.hotel.repositories.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +16,7 @@ public class CustomerServImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
     public CustomerServImpl(CustomerRepository customerRepository, BCryptPasswordEncoder passwordEncoder) {
         this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;

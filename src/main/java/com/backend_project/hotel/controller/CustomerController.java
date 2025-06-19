@@ -1,4 +1,3 @@
-```java
 package com.backend_project.hotel.controller;
 
 import com.backend_project.hotel.exception.CustomerAlreadyExistsException;
@@ -47,4 +46,3 @@ public class CustomerController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
-```
