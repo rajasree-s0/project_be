@@ -1,4 +1,3 @@
-
 package com.backend_project.hotel.service;
 
 import com.backend_project.hotel.model.CustomerModel;

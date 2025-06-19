@@ -1,4 +1,3 @@
-
 package com.backend_project.hotel.config;
 
 import org.springframework.context.annotation.Bean;
